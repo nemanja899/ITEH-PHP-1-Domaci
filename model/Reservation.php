@@ -2,18 +2,18 @@
 class Reservation
 {
 
-    public $ID;
-    public $Name;
-    public $Description;
-    public $Price;
-    public $Place;
+    public $Date;
+    public $UserID;
+    public $VacationID;
+    public $DateFrom;
+    public $DateTo;
 
-    public function __construct($ID = null, $Name = null, $Description = null, $Price = null, $Place = null)
+    public function __construct($Date = null, $UserID = null, $VacationID = null, $DateFrom = null, $DateTo = null)
     {
-        $this->ID = $ID;
-        $this->Name = $Name;
-        $this->Description = $Description;
-        $this->Price = $Price;
-        $this->Place = $Place;
+        $this->Date = $Date;
+        $this->UserID = $UserID;
+        $this->VacationID = $VacationID;
+        $this->DateFrom = $DateFrom;
+        $this->DateTo = $DateTo;
     }
 }
