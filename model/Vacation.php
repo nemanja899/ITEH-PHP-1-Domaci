@@ -1,5 +1,6 @@
 <?php
-class Vacation{
+class Vacation
+{
 
     public $ID;
     public $Name;
@@ -7,31 +8,43 @@ class Vacation{
     public $Price;
     public $Place;
 
-    public function __construct($ID=null,$Name=null,$Description=null,$Price=null,$Place=null)
+    public function __construct($ID = null, $Name = null, $Description = null, $Price = null, $Place = null)
     {
-        $this->ID=$ID;
-        $this->Name=$Name;
-        $this->Description=$Description;
-        $this->Price=$Price;
-        $this->Place=$Place;
+        $this->ID = $ID;
+        $this->Name = $Name;
+        $this->Description = $Description;
+        $this->Price = $Price;
+        $this->Place = $Place;
     }
 
-    public static function searchByCondtition($condition, mysqli $conn){
+    public static function searchByCondtition($condition, mysqli $conn)
+    {
         $query = "SELECT * FROM vacation WHERE id = $condition or
          name = '$condition' or description='$condition' or price = $condition or place = '$condition";
 
         $result = array();
-        if($msqlObj = $conn->query($query)){
-            while($red = $msqlObj->fetch_array()){
-            $result[]=$red;
-            
+        if ($msqlObj = $conn->query($query)) {
+            while ($red = $msqlObj->fetch_array()) {
+                $result[] = $red;
+            }
+            return $result;
         }
-        return $result;
     }
-       
 
+    public static function getTopSix(mysqli $conn)
+    {
+        $query = "SELECT * FROM vacation";
+
+        $result = array();
+        if ($msqlObj = $conn->query($query)) {
+            $i=0;
+            while ($red = $msqlObj->fetch_array() and $i++ < 6) {
+                $result[] = $red;
+            }
+            return $result;
+        }
     }
-  
+
     #deleteById
 
     public function delete(mysqli $conn)

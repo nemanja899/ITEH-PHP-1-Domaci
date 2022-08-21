@@ -1,3 +1,16 @@
+<?php 
+require_once 'model/Vacation.php';
+require_once 'DbConnectionFactory.php';
+session_start();
+$top_places = Vacation::getTopSix($conn);
+if (!$top_places) {
+    echo "Nastala je greška pri preuzimanju podataka";
+    die();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +27,7 @@
 </head>
 <body>
   <!-- navbar -->
+  <section class="header">
     <nav class="navbar">
         <div class ="container flex">
             <a href="Index.html" class="site-brand">
@@ -48,6 +62,7 @@
 
         </div>
     </nav>
+  </section>
   <!-- kraj navbara -->
 
   <!-- header -->
@@ -60,10 +75,10 @@
           <div class="header-form">
               <h2>Izaberi svoju destinaciju:</h2>
               <form id="myform" class="flex">
-                  <input type ="text" class="form-control" placeholder="Destination name">
-                  <input type="date" id="datum" class="form-control" placeholder="Date">
-                  <input type="number" class= "form-control" placeholder="Cena(RSD)" >
-                  <button type="submit" id="search" class="btn"> Search</button>
+                  <input type ="text" class="form-control" name="place" placeholder="Destination name">
+                  <input type="date" id="datum" name="date" class="form-control" placeholder="Date">
+                  <input type="number" class= "form-control" name="price"  placeholder="Cena(RSD)" >
+                  <button type="submit" id="search" name="search" class="btn"> Search</button>
               </form>
           </div>
       </div>
@@ -80,85 +95,22 @@
               <h2 class="lg-title">odabrana mesta</h2>
           </div>
           <div class="featured-row">
+            <?php  foreach($top_places as $tp_place){ ?>
               <div class="featured-item m2 shadow">
-                  <img src="Img/P0IWPNJ-serbia-wallpaper.jpg">
+                <div class="featured-item-img">
+                  <img src="<?php echo "Img/".Strtolower( $tp_place['Name'])."/". Strtolower($tp_place['Name'])."-featured".".jpg"?>"></img>
+                </div>
                   <div class ="featured-item-content">
                       <span>
                           <i class ="fas fa-map-marker-alt"></i>
-                          Meandri Uvca
+                          <?php echo $tp_place['Name'].','.$tp_place["Place"]?>
                       </span>
                       <div>
-                          <p class="text">Reka Uvac protice izmedju planine Zlatar i Zlatibor</p>
+                          <p class="text"><?php echo $tp_place['Description']?></p>
                       </div>
                   </div>
               </div>
-          
-          
-              <div class="featured-item m2 shadow">
-                  <img src="Img/Gostoljublje,Kosjeric.jpg">
-                  <div class ="featured-item-content">
-                      <span>
-                          <i class ="fas fa-map-marker-alt"></i>
-                          Gostoljublje,Kosjeric
-                      </span>
-                      <div>
-                          <p class="text">Gostoljublje nalazi se u Kosjeriću i nudi smeštaj sa restoranom, sezonskim bazenom na otvorenom, zajedničkim salonom, vrtom i pogledom na bazen</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="featured-item m2 shadow">
-                  <img src="Img/Moravski-konaci.jpg">
-                  <div class ="featured-item-content">
-                      <span>
-                        <i class ="fas fa-map-marker-alt"></i>
-                        Moravski Konaci,Velika Plana
-                       </span>
-                      <div>
-                        <p class="text">Moravski Konaci nalazi se u Velikoj Plani i poseduje restoran, sezonski bazen na otvorenom, bar i vrt. Sve sobe sadrže TV sa kablovskim kanalima i sopstveno kupatilo</p>
-                      </div>
-                    </div>
-              
-                </div>
-                <div class="featured-item m2 shadow">
-                    <img src="Img/Sigojno.jpg">
-                    <div class ="featured-item-content">
-                        <span>
-                          <i class ="fas fa-map-marker-alt"></i>
-                          Sirogojno,Zlatibor
-                         </span>
-                        <div>
-                          <p class="text">Sirogojno je udaljeno 26 km od Zlatibora. Poznato je po muzeju pod otvorenim nebom “Staro selo” i čuvenim pletiljama. Tokom sezone u selu se organizuju brojni likovni, muzički, i književni susreti, izložbe, predavanja i letnje škole</p>
-                        </div>
-                      </div>
-                
-                </div>
-                <div class="featured-item m2 shadow">
-                    <img src="Img/Stanisici.jpeg">
-                    <div class ="featured-item-content">
-                        <span>
-                          <i class ="fas fa-map-marker-alt"></i>
-                          Stanisici,Bjeljina
-                         </span>
-                        <div>
-                          <p class="text">Spa centar raspolaže sa bazenom na otvorenom, hidromasažnom kadom, saunom i fitnes zonom, a nudi opuštanje nakon dana provedenog u istraživanju sela i okoline</p>
-                        </div>
-                      </div>
-                
-                </div>
-                <div class="featured-item m2 shadow">
-                    <img src="Img/Trsic.jpg">
-                    <div class ="featured-item-content">
-                        <span>
-                          <i class ="fas fa-map-marker-alt"></i>
-                          Trsic, Loznica
-                         </span>
-                        <div>
-                          <p class="text"> Nastalo je u želji da se oživi uspomena na Vuka Karadžića i sačuva duh vremena</p>
-                        </div>
-                      </div>
-                
-                </div>
-
+                <?php }?>
             </div>
       </div>
   </section>
