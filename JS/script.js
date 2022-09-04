@@ -1,47 +1,35 @@
- let navbarDiv = document.querySelector('.navbar'); // menja pozadinu navbara kada skrolujemo na skrol
-window.addEventListener('scroll',()=> {
-    if(document.body.scrollTop > 40 || document.documentElement.scrollTop>40){
-        navbarDiv.classList.add('navbar-cng');//dodaje klasu cng u navbar
-    }else {
-        navbarDiv.classList.remove('navbar-cng');
-    }
-});
 
-const navbarCollapseDiv = document.getElementById('navbar-collapse');
-const navbarShowBtn = document.getElementById('navbar-show-btn');
-const navbarCloseBtn = document.getElementById('navbar-close-btn');
-// prikazati navbar
-navbarShowBtn.addEventListener('click', () => {
-    navbarCollapseDiv.classList.add('navbar-collapse-rmw');
-});
-// zatvori navbar
-navbarCloseBtn.addEventListener('click',()=>{
-    navbarCollapseDiv.classList.remove('navbar-collapse-rmw');
-});
+ let navbarDiv = document.querySelector('.header-navbar'); // menja pozadinu navbara kada skrolujemo na skrol
+ window.addEventListener('scroll',()=> {
+     if(document.body.scrollTop > 40 || document.documentElement.scrollTop>40){
+         navbarDiv.classList.add('navbar-cng');//dodaje klasu cng u navbar
+     }else {
+         navbarDiv.classList.remove('navbar-cng');
+     }
+ });
 
+let menu=document.querySelector('#menu-btn');
+let navbar=document.querySelector('.header-navbar .navbar');
 
+menu.onclick = ()=>{
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+ 
+};
 
-// zaustavi tranziciju i animaciju tokom smanjenja prozora
-let resizeTimer;
-window.addEventListener('resize',()=>{
-    document.body.classList.add("resize-animation-stoper");
-    clearTimeout(resizeTimer);
-    resizeTimer=setTimeout(()=>{
-        document.body.classList.remove("resize-animation-stoper");
-    },400);
-});
-// manjifik popuup
-$(document).ready(function() {
-    $('.parent-container').magnificPopup({
-        delegate: 'a', // child items selector, by clicking on it popup will open
-        type: 'image',
-        gallery:{
-            enabled:true}
-        // other options
-      });
-  });
+window.onscroll = ()=>{
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+};
 
+let homesection=document.querySelector(".home").clientHeight;
+document.querySelector(".featured-places").style.marginTop=homesection-300+"px";
 
+let feturedchild = document.querySelector(".featured-places .box-container").childElementCount;
+let children = document.querySelector(".featured-places .box-container").children;
+for (let i = 0; i < feturedchild; i++) {
+    children.item(i).style.display = "inline-block";
+}
 
 
 

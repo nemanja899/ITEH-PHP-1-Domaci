@@ -1,12 +1,12 @@
 <?php 
-require_once 'model/Vacation.php';
-require_once 'DbConnectionFactory.php';
-session_start();
-$top_places = Vacation::getTopSix($conn);
-if (!$top_places) {
-    echo "Nastala je greška pri preuzimanju podataka";
-    die();
-}
+    require_once 'model/Vacation.php';
+    require_once 'DbConnectionFactory.php';
+    session_start();
+    $top_places = Vacation::getTopSix($conn);
+    if (!$top_places) {
+        echo "Nastala je greška pri preuzimanju podataka";
+        die();
+    }
 
 ?>
 
@@ -25,52 +25,30 @@ if (!$top_places) {
 
     <link rel="stylesheet"  href="CSS/Style.css">
 </head>
+
 <body>
   <!-- navbar -->
-  <section class="header">
-    <nav class="navbar">
-        <div class ="container flex">
-            <a href="Index.html" class="site-brand">
+  <section class="header-navbar">
+            <a href="index.php" class="site-brand">
                 Etno<span>Srbija</span>
             </a>
-            <button type="buttnon" id="navbar-show-btn" class="flex">
-                <i class= "fas fa-bars"></i>
-            </button>
-            <div id="navbar-collapse">
-                <button type="button" id="navbar-close-btn" class="flex" >
-                    <i class="fas fa-times"></i>
-                </button>
-                <ul class="navbar-nav">
-                    <li class ="nav-item">
-                        <a href ="Index.html" class="nav-link active"> Home</a>
-
-                    </li>
-                    <li class ="nav-item">
-                        <a href ="Gallery.html" class="nav-link"> Gallery</a>
-
-                    </li>
-                    <li class ="nav-item">
-                        <a href ="About.html" class="nav-link"> About</a>
-
-                    </li>
-                    <li class ="nav-item">
-                        <a href ="Contact.html" class="nav-link"> Contact</a>
-
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
+            <nav class="navbar">
+                <a href ="index.php" class="active-page"> Home</a>
+                <a href ="About.php"> About</a>
+                <a href ="Contact.php"> Contact</a>
+            </nav>
+            <div id="menu-btn" class="fas fa-bars"></div>
   </section>
   <!-- kraj navbara -->
 
   <!-- header -->
-  <header class="flex">
-      <div class="container">
+  <section class="home-section">
+    <div class="home">
+      <div class="slide">
+        <div class="content">
           <div class="header-title">
-              <h1>Pusti svoj korak </h1>
-              <p>Iskusite nešto potpuno novo, a ipak staro. Probudite se u toplom zagrljaju mira i tišine, i provedite dan ušuškani u čuveno srpsko gostoprimstvo. Naučite stari zanat ili dva u prelepoj prirodi. I uživajte u čarima tradicionalne srpske kuhinje. </p>
+              <h1>Etno Sela Srbije</h1>
+              <p>Iskusite nešto potpuno novo, a ipak staro.</p>
           </div>
           <div class="header-form">
               <h2>Izaberi svoju destinaciju:</h2>
@@ -81,26 +59,27 @@ if (!$top_places) {
                   <button type="submit" id="search" name="search" class="btn"> Search</button>
               </form>
           </div>
+        </div>
       </div>
-
-  </header>
+    </div>
+</section>
   <!-- kraj headera -->
 
   <!-- sekcija odabranih lokacija -->
-  <section id="featured" class="slikeSrb">
-      <div class="container">
+  <section  class="featured-places">
           <div class="title-wrap">
               <span class="sm-title">Upoznati neka mesta 
               pre nego sto odputujete</span>
               <h2 class="lg-title">odabrana mesta</h2>
           </div>
-          <div class="featured-row">
-            <?php  foreach($top_places as $tp_place){ ?>
-              <div class="featured-item m2 shadow">
-                <div class="featured-item-img">
-                  <img src="<?php echo "Img/".Strtolower( $tp_place['Name'])."/". Strtolower($tp_place['Name'])."-featured".".jpg"?>"></img>
-                </div>
-                  <div class ="featured-item-content">
+          <div class="box-container">
+          <?php  foreach($top_places as $tp_place){ ?>
+            <div class="box">
+                <a href="Item-info.php" class="item-info">
+                    <div class="image">
+                      <img src="<?php echo "Img/".Strtolower( $tp_place['Name'])."/". Strtolower($tp_place['Name'])."-featured".".jpg"?>"></img>
+                    </div>
+                    <div class ="content">
                       <span>
                           <i class ="fas fa-map-marker-alt"></i>
                           <?php echo $tp_place['Name'].','.$tp_place["Place"]?>
@@ -108,74 +87,67 @@ if (!$top_places) {
                       <div>
                           <p class="text"><?php echo $tp_place['Description']?></p>
                       </div>
+                    </div>
+                    </a>
                   </div>
-              </div>
+                
                 <?php }?>
-            </div>
+          </div>
       </div>
   </section>
   <!-- kraj sekcije odabranih lokacija -->
-  <!-- footer -->
-  <footer class="slikeSrb">
-      <div class="container footer-row">
-          <div class="footer-item">
-              <a href="Index.html" class="site-brand">
-                  Etno<span>Srbija</span>
-              </a>
-              <p class="text"> Samo se uputite u jedno od bajkovitih srpskih etno sela! Zaljubićete se u Srbiju još više – to vam obećavamo!</p>
-          </div>
-          <div class="footer-item">
-              <h2>Pratite nas na:</h2>
-              <ul class="social-links">
-                  <li>
-                      <a href="#">
-                        <i class ="fab fa-facebook-f"></i>
-                      </a>
-                   </li>
-                   <li>
-                    <a href="#">
-                      <i class ="fab fa-instagram"></i>
-                    </a>
-                 </li>
-                 <li>
-                    <a href="#">
-                      <i class ="fab fa-twitter"></i>
-                    </a>
-                 </li>
-                 <li>
-                    <a href="#">
-                      <i class ="fab fa-pinterest"></i>
-                    </a>
-                 </li>
-                 <li>
-                    <a href="#">
-                      <i class ="fab fa-google-plus"></i>
-                    </a>
-                 </li>
-              </ul>
-          </div>
-          <div class="footer-item">
-              <h2>Popularna mesta</h2>
-              <ul>
-                  <li><a href="#">Uvac</a></li>
-                  <li><a href="#">Gostoljublje</a></li>
-                  <li><a href="#">Moravski Konaci</a></li>
-                  <li><a href="#">Stanisici</a></li>
-                  <li><a href="#">Sirogojno</a></li>
-                  <li><a href="#">Trsic</a></li>
-              </ul>
 
-          </div>
-          <div class="subscripe-form footer-item">
+
+
+
+  <!-- footer -->
+<section class="footer">
+  <footer class="myfooter">
+        <a href="Index.html" class="site-brand">
+            Etno<span>Srbija</span>
+        </a>
+        <p class="text"> Samo se uputite u jedno od bajkovitih srpskih etno sela! Zaljubićete se u Srbiju još više – to vam obećavamo!</p>
+      
+        <div class="box-container">
+       
+
+          <div class="box">
+            <h3>Popularna mesta</h3>
+            <a href="#"><i class="fas fa-angle-right"></i> Uvac</a>
+            <a href="#"><i class="fas fa-angle-right"></i> Gostoljublje</a>
+            <a href="#"><i class="fas fa-angle-right"></i> Moravski Konaci</a>
+            <a href="#"><i class="fas fa-angle-right"></i> Stanisici</a>
+            <a href="#"><i class="fas fa-angle-right"></i> Sirogojno</a>
+            <a href="#"><i class="fas fa-angle-right"></i> Trsic</a>
+        </div>
+
+        <div class="box">
+         <h3>Kontakt info</h3>
+         <a href="#"> <i class="fas fa-phone"></i> +381-456-7890 </a>
+         <a href="#"> <i class="fas fa-mobile"></i> +381-222-3333 </a>
+         <a href="#"> <i class="fas fa-envelope"></i> neca@gmail.com </a>
+         <a href="#"> <i class="fas fa-map"></i> Vrbnica, Serbia - 400104 </a>
+      </div>
+
+      <div class="box">
+            <h3>Pratite nas na:</h3>
+            <a href="#"><i class ="fab fa-facebook-f"></i></a>   
+            <a href="#"><i class ="fab fa-instagram"></i></a>
+            <a href="#"><i class ="fab fa-twitter"></i></a>
+            <a href="#"><i class ="fab fa-pinterest"></i></a>
+        </div>
+        
+          <div class="subscripe-form box">
               <h2>Prijavite se za najnovije vesti!</h2>
               <form class="flex">
-                  <input type="email" placeholder="Enter email" class="form-control">
-                  <input type="submit" class="btn" value="Subscribe">
-                </form>
+                  <input type="email" placeholder="Enter email" name="email-sub" class="form-control">
+                  <input type="submit" class="btn" name="subscribe" value="Subscribe">
               </form>
           </div>
       </div>
+      <div class="credit"> created by <span>@nemanja</span> | all rights reserved! &trade; </div>
   </footer>
+</section>
   <!-- kraj footer -->
     <script src = "JS/script.js"></script>
 </body>
