@@ -36,6 +36,10 @@ class User
 
     }
   
+    public function searchUserByCondiction(mysqli $conn, $condition){
+        $query = "SELECT * FROM user WHERE email='$condition' or firstname='$condition' or lastname='$condition' or password='$condition'";
+        return $conn->query($query);
+    }
     #deleteById
 
     public function deleteUser(mysqli $conn)

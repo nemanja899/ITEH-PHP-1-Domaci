@@ -291,6 +291,7 @@ button, input[type="submit"]{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(26rem,1fr));
     gap: 2rem;
+    height: 100%;
 }
 
 .featured-places .box-container .box{
@@ -298,8 +299,9 @@ button, input[type="submit"]{
     border: var(--green);
     box-shadow: var(--dark);
     margin-left:2rem;
-    display: none;
+    height: 100%;
     overflow: hidden;
+   
 }
 
 .featured-places .box-container .box::after{
@@ -317,6 +319,7 @@ button, input[type="submit"]{
 .featured-places .box-container .box:hover .image img{
     transform: scale(1.1);
     filter: grayscale(60%);
+    cursor: pointer;
  }
  
  .featured-places .box-container .box .image{
@@ -354,6 +357,81 @@ button, input[type="submit"]{
 }
 .featured-places .box-container .box:hover .content{
     transform: translateY(0);
+}
+.container{
+    max-width:1068px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login{
+    padding-left: 2rem;
+    display: grid;
+    grid-template-columns:0.4fr 1fr;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.login::before{
+    content:"";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;left: 0;
+    background: url(../Img/login.png) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    border-top: 1px solid var(--dark);
+    filter: grayscale(60%);
+    z-index: -1;
+ }
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    box-shadow: -12px -14px 289px rgb(211 106 106);
+    align-items: center;
+    background: rgba(211,106,106,0.5);
+    padding: 3rem 0;
+    border-radius: 3rem;
+}
+.login-container h2{
+    font: size 1.4em;
+}
+
+.login-container p{
+    font-size: 0.9rem;
+}
+
+.login-container form{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.login-container form span{
+    font-size: 0.8rem !important;
+    color: var(--green) !important;
+    margin-bottom: 0.4rem !important;
+    font-weight: 700;
+}
+
+.login-container form input{
+    border: 1px saddlebrown;
+    outline: none;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  
+}
+
+.login-container form a{
+    font-size: 0.9rem;
+    text-align:right;
+}
+
+.login-container .btn{
+    border-radius: 0;
+    text-align: center;
 }
 .footer{
     border-top: solid 0.2rem var(--green);
