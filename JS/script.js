@@ -1,12 +1,17 @@
-let login = document.getElementById("login");
-let navbarDiv = document.querySelector(".header-navbar"); // menja pozadinu navbara kada skrolujemo na skrol
+// menja pozadinu navbara kada skrolujemo na skrol
 window.addEventListener("scroll", () => {
+  let login = document.getElementById("login");
+  let navbarDiv = document.querySelector(".header-navbar");
   if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
     navbarDiv.classList.add("navbar-cng"); //dodaje klasu cng u navbar
-    login.style.display = "none";
+    if (login != null) {
+      login.style.display = "none";
+    }
   } else {
     navbarDiv.classList.remove("navbar-cng");
-    login.style.display = "inline-block";
+    if (login != null) {
+      login.style.display = "inline-block";
+    }
   }
 });
 
@@ -27,8 +32,6 @@ let homesection = document.querySelector(".home").clientHeight;
 document.querySelector(".featured-places").style.marginTop =
   homesection - 300 + "px";
 
-
-
 document.getElementById("datum").addEventListener("change", function () {
   var input = this.value;
   var dateEntered = new Date(input);
@@ -40,3 +43,19 @@ document.getElementById("datum").addEventListener("change", function () {
     alert("Pogresan datum");
   }
 });
+
+$(".dropbtn").click(function dropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+});
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (e) {
+  if (!e.target.matches(".dropbtn")) {
+    var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown != null) {
+      if (myDropdown.classList.contains("show")) {
+        myDropdown.classList.remove("show");
+      }
+    }
+  }
+};

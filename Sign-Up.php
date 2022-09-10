@@ -1,32 +1,26 @@
 <?php
+
 require_once "DbconnectionFactory.php";
 require_once "model/User.php";
-session_start();
-if (isset($_POST['email']) && isset($_POST['password'])) {
-    
-   
-    $user = User::login($_POST['email'], $_POST['password'], $conn);
-   
-    if ($user != null) {
-    
-        $_SESSION['user'] = $user->FirstName;
-        $_SESSION['ID']=$user->ID;
+
+if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['FirstName']) && isset($_POST['LastName']) && $_POST['submit-signup'] == 'Sign Up') {
+
+    $user = new User();
+    $user->FirstName = $_POST['FirstName'];
+    $user->LastName = $_POST['LastName'];
+    $user->Password = $_POST['password'];
+    $user->Email = $_POST['email'];
+    $result = User::add($user, $conn);
+
+    if ($result) {
         $_POST[]=array();
-      
-        if ($user->FirstName != "Admin") {
-       
-            header('Location: index.php');
-            exit();
-        } else {
+        header('Location:Login.php');
         
-            header('Location: upload.php');
-            exit();
-        }
+        exit();
     }
 }
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,22 +55,30 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     <div class="login container">
         <div class="login-container">
-            <h2>Prijavi se</h2>
+            <h2>Napravi Nalog</h2>
             <p>Unesi podatke</p>
             <form action="" method="POST">
                 <span>Unesi svoju email adresu</span>
                 <input type="email" name="email" id="email" placeholder="youremail@gmail.com" required>
                 <span>Unesi sifru</span>
                 <input type="password" name="password" id="password" placeholder="Password" required>
-                <input type="submit" name="submit-login" value="Login" class="btn" id="submit-login">
-                <a href="?email;" id="forget_password">Zaboravljena sifra?</a>
-                <div class="forget_password">
-                    <p id="show-password">
-
+                <span>Unesi Ime</span>
+                <input type="text" name="FirstName" id="firstname" placeholder="First Name" required>
+                <span>Unesi Prezime</span>
+                <input type="text" name="LastName" id="lastname" placeholder="Last Name" required>
+                <input type="submit" name="submit-signup" value="Sign Up" class="btn" id="submit-login">
+                <div>
+                    <p>
+                        <?php
+                        if(isset($_POST['submit-signup'])){
+                        
+                            echo "Nije uspela registracija";
+                       
+                        }
+                        ?>
                     </p>
                 </div>
             </form>
-            <a href="Sign-Up.php" class="btn">Sign Up</a>
         </div>
     </div>
 

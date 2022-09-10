@@ -22,13 +22,14 @@ class User
         $this->Password = $Password;
     }
 
-    public static function login($username,$password, mysqli $conn){
-        $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-
+    public static function login($email,$password, mysqli $conn){
+        $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+        
         $user = null;
         if($msqlObj = $conn->query($query)){
+            
             $red = $msqlObj->fetch_array();
-            $user= new User($red["id"],$red["firstname"],$red["lastname"],$red["email"],$red["password"]);
+            $user= new User($red["ID"],$red["FirstName"],$red["LastName"],$red["Email"],$red["Password"]);
             
         }
 
@@ -58,7 +59,7 @@ class User
 
     public static function add(User $user, mysqli $conn)
     {
-        $query = "INSERT INTO user(firstname, lastname, email,password) VALUES('$user->FirstName', '$user->LastName', '$user->Email','$user->Password')";
+        $query = "INSERT INTO user (firstname, lastname, email,password) VALUES('$user->FirstName', '$user->LastName', '$user->Email','$user->Password')";
         return $conn->query($query);
     }
 }

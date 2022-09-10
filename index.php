@@ -7,6 +7,14 @@ if (!$top_places) {
   echo "Nastala je greška pri preuzimanju podataka";
   die();
 }
+if (isset($_GET['logout'])) {
+  session_destroy();
+  session_start();
+}
+if (isset($_GET['profile'])) {
+  header('Location:Profile.php');
+  exit();
+}
 
 ?>
 
@@ -39,9 +47,26 @@ if (!$top_places) {
       <a href="Contact.php"> Contact</a>
     </nav>
     <div id="menu-btn" class="fas fa-bars"></div>
-    <div id="login">
-      <a href="Login.php" class="btn">Log In</a>
-    </div>
+    <?php if (!isset($_SESSION['user'])) {
+      echo "<script>console.log('ime nije setovano');</script>";
+    ?>
+      <div id="login">
+        <a href="Login.php" class="btn">Log In</a>
+      </div>
+    <?php } else {
+    ?>
+
+      <div class="dropdown" id="login">
+        <button class="dropbtn btn"><?php echo $_SESSION['user']; ?>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="?logout">Izloguj se</a>
+          <a href="?profile">Profil</a>
+        </div>
+      </div>
+
+    <?php } ?>
   </section>
   <!-- kraj navbara -->
 
