@@ -64,7 +64,9 @@ class Vacation
 
     public static function add(Vacation $vacation, mysqli $conn)
     {
-        $query = "INSERT INTO vacation(name, description, price,place) VALUES('$vacation->Name', '$vacation->Description', $vacation->Price,'$vacation->Place'";
-        return $conn->query($query);
+        $query = "INSERT INTO vacation(name, description, price, place) VALUES('$vacation->Name', '$vacation->Description', $vacation->Price,'$vacation->Place')";
+        $result=$conn->query($query);
+      
+        return $result;
     }
 }

@@ -8,6 +8,7 @@ if (!$top_places) {
   die();
 }
 if (isset($_GET['logout'])) {
+  session_unset();
   session_destroy();
   session_start();
 }
@@ -15,7 +16,10 @@ if (isset($_GET['profile'])) {
   header('Location:Profile.php');
   exit();
 }
-
+if(isset($_GET['upload'])) {
+  header('Location:upload.php');
+  exit();
+}
 ?>
 
 
@@ -63,6 +67,8 @@ if (isset($_GET['profile'])) {
         <div class="dropdown-content" id="myDropdown">
           <a href="?logout">Izloguj se</a>
           <a href="?profile">Profil</a>
+          <?php if ($_SESSION['user'] == "Admin") { ?>
+            <a href="?upload">Upload</a><?php } ?>
         </div>
       </div>
 

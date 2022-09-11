@@ -442,27 +442,29 @@ button, input[type="submit"]{
     padding: 3rem 0;
     border-radius: 3rem;
 }
-.login-container h2{
+.login-container ,.upload-container h2{
     font: size 1.4em;
 }
 
-.login-container p{
+.login-container p,.upload-container p{
     font-size: 0.9rem;
 }
 
-.login-container form{
+.login-container form, .upload-container form{
     display: flex !important;
     flex-direction: column !important;
 }
 
-.login-container form span{
-    font-size: 0.8rem !important;
-    color: var(--green) !important;
-    margin-bottom: 0.4rem !important;
+.login-container form span,.upload-container form span{
+    font-size: 0.8rem ;
+    color: var(--green);
+    margin-bottom: 0.4rem;
     font-weight: 700;
 }
-
-.login-container form input{
+.upload-container form span{
+    color: rgb(0 255 137) !important;
+}
+.login-container form input,.upload-container form input{
     border: 1px saddlebrown;
     outline: none;
     padding: 0.8rem;
@@ -475,10 +477,44 @@ button, input[type="submit"]{
     text-align:right;
 }
 
-.login-container .btn{
+.login-container .btn,.upload-container .btn{
     border-radius: 0;
     text-align: center;
 }
+
+.upload{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.upload::before{
+    content:"";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;left: 0;
+    background: url(../Img/upload-bg.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    border-top: 1px solid var(--dark);
+    filter: grayscale(60%);
+    z-index: -1;
+ }
+
+ .upload-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    box-shadow: -12px -14px 289px rgb(211 106 106);
+    align-items: center;
+    background: rgba(211,106,106,0.5);
+    padding: 3rem 0;
+    border-radius: 3rem;
+ }
 .footer{
     border-top: solid 0.2rem var(--green);
     padding: 0;
