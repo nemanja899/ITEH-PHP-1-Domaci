@@ -31,18 +31,20 @@ window.onscroll = () => {
 let homesection = document.querySelector(".home").clientHeight;
 document.querySelector(".featured-places").style.marginTop =
   homesection - 300 + "px";
-
-document.getElementById("datum").addEventListener("change", function () {
-  var input = this.value;
-  var dateEntered = new Date(input);
-  console.log(input);
-  console.log(dateEntered);
-  var today = new Date();
-  console.log(today);
-  if (dateEntered < today) {
-    alert("Pogresan datum");
-  }
-});
+let date = document.getElementById("datum");
+if (date != null) {
+  date.addEventListener("change", function () {
+    var input = this.value;
+    var dateEntered = new Date(input);
+    console.log(input);
+    console.log(dateEntered);
+    var today = new Date();
+    console.log(today);
+    if (dateEntered < today) {
+      alert("Pogresan datum");
+    }
+  });
+}
 
 $(".dropbtn").click(function dropdown() {
   document.getElementById("myDropdown").classList.toggle("show");

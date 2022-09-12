@@ -52,7 +52,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         <nav class="navbar">
             <a href="index.php" class="active-page"> Home</a>
             <a href="About.php"> About</a>
-            <a href="Contact.php"> Contact</a>
         </nav>
         <div id="menu-btn" class="fas fa-bars"></div>
 

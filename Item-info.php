@@ -47,7 +47,6 @@ if (isset($_GET['upload'])) {
         <nav class="navbar">
             <a href="index.php" class="active-page"> Home</a>
             <a href="About.php"> About</a>
-            <a href="Contact.php"> Contact</a>
         </nav>
         <div id="menu-btn" class="fas fa-bars"></div>
         <?php if (!isset($_SESSION['user'])) {
