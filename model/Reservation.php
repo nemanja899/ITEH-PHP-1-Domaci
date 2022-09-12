@@ -42,7 +42,7 @@ class Reservation
 
     public static function add(Reservation $reservation, mysqli $conn)
     {
-        $query = "INSERT INTO reservation(date, userid, vacationid, datefrom,dateto) VALUES('$reservation->Date',$reservation->UserID,$reservation->VacationID,'$reservation->DateFrom','$reservation->DateTO')";
+        $query = "INSERT INTO reservation(date, userid, vacationid, datefrom,dateto) VALUES('$reservation->Date', $reservation->UserID,$reservation->VacationID,'$reservation->DateFrom', '$reservation->DateTo')";
         return $conn->query($query);
     }
 }

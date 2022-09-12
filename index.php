@@ -2,10 +2,18 @@
 require_once 'model/Vacation.php';
 require_once 'DbConnectionFactory.php';
 session_start();
-$top_places = Vacation::getTopSix($conn);
-if (!$top_places) {
-  echo "Nastala je greška pri preuzimanju podataka";
-  die();
+
+if (!isset($_SESSION['places'])) {
+  $top_places = Vacation::getTopSix($conn);
+  $len = count($top_places);
+  if (!$top_places) {
+    echo "Nastala je greška pri preuzimanju podataka";
+    die();
+  }
+} else {
+  $top_places = $_SESSION['places'];
+  $len = count($top_places);
+  unset($_SESSION['places']);
 }
 if (isset($_GET['logout'])) {
   session_unset();
@@ -16,8 +24,20 @@ if (isset($_GET['profile'])) {
   header('Location:Profile.php');
   exit();
 }
-if(isset($_GET['upload'])) {
+if (isset($_GET['upload'])) {
   header('Location:upload.php');
+  exit();
+}
+if (isset($_GET['item-info'])) {
+  $_SESSION['name'] = $_GET["name"];
+  $_SESSION['description'] = $_GET["description"];
+  $_SESSION['place'] = $_GET["place"];
+  $_SESSION['price'] = $_GET["price"];
+  $_SESSION['item-id'] = $_GET["item-id"];
+  $idItem= $_SESSION['item-id'];
+  $idUser= $_SESSION['user-id'];
+  echo "<script>console.log('$idItem','$idUser')</script>";
+  header('Location:Item-info.php');
   exit();
 }
 ?>
@@ -88,7 +108,7 @@ if(isset($_GET['upload'])) {
           <div class="header-form">
             <h2>Izaberi svoju destinaciju:</h2>
             <form id="myform" class="flex">
-              <input type="text" class="form-control" name="place" placeholder="Destination name">
+              <input type="text" class="form-control" name="place" placeholder="Destination name" id="place-search" required>
               <input type="date" id="datum" name="date" class="form-control" placeholder="Date">
               <button type="submit" id="search" name="search" class="btn"> Search</button>
             </form>
@@ -108,9 +128,11 @@ if(isset($_GET['upload'])) {
         <h2 class="lg-title">odabrana mesta</h2>
       </div>
       <div class="box-container">
-        <?php foreach ($top_places as $tp_place) { ?>
+        <?php foreach ($top_places as $tp_place) {
+          $i = 0;
+          $i++; ?>
           <div class="box">
-            <a href="Item-info.php" class="item-info">
+            <a href="?item-info&item-id=<?php echo $tp_place['ID']; ?>&place=<?php echo $tp_place['Place']; ?>&price=<?php echo $tp_place['Price']; ?>&name=<?php echo $tp_place['Name']; ?>&description=<?php echo $tp_place['Description']; ?>" class="item-info">
               <div class="image">
                 <img src="<?php echo "Img/" . Strtolower($tp_place['Name']) . "/" . Strtolower($tp_place['Name']) . "-featured" . ".jpg" ?>"></img>
               </div>
@@ -128,6 +150,10 @@ if(isset($_GET['upload'])) {
 
         <?php } ?>
       </div>
+    </div>
+
+
+
   </section>
   <!-- kraj sekcije odabranih lokacija -->
 
@@ -184,6 +210,7 @@ if(isset($_GET['upload'])) {
   </section>
   <!-- kraj footer -->
   <script src="JS/script.js"></script>
+  <script src="JS/ajax.js"></script>
 </body>
 
 </html>

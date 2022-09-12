@@ -49,7 +49,9 @@ section{
     align-items: center;
     justify-content: space-between; 
  }
-
+.item-navbar{
+    background-color: khaki !important;
+}
  .header-navbar .site-brand{
     margin-left:2rem;
     color:#fff;
@@ -345,7 +347,7 @@ button, input[type="submit"]{
     border: var(--green);
     box-shadow: var(--dark);
     margin-left:2rem;
-    height: 100%;
+    max-height: 400px;
     overflow: hidden;
    
 }
@@ -515,6 +517,70 @@ button, input[type="submit"]{
     padding: 3rem 0;
     border-radius: 3rem;
  }
+
+ .small-container {
+    max-width: 1000px;
+    margin:auto;
+    padding-left: 2rem;
+    padding-right: 1.5rem;
+ }
+ .row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+ }
+
+ .single-destination{
+    margin-top:5rem;
+ }
+.small-img-row{
+    display: flex;
+    justify-content: space-around;
+}
+.col-2 img{
+    max-width: 100%;
+    padding:3rem 0;
+}
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+    
+}
+.col-2{
+    flex-basis: 50%;
+    line-height: 3.5rem;
+    margin:1.8rem 0;
+    min-width: 300px;
+}
+.col-2 h3{
+    
+    font-size:4vW;
+    line-height: 2vw;
+    margin-block: 1.8rem 0;
+
+}
+.single-destination h4{
+    margin: 1.2rem 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.single-destination input{
+    width: 8rem;
+    height: 4rem;
+    background: beige;
+    padding-left: 0.8rem;
+    margin-right: 0.8rem;
+    border: 1px solid #0e1010;
+}
+
+.single-destination .col-2 img{
+    padding:0;
+}
+.single-destination .col-2{
+    padding:1rem;
+}
 .footer{
     border-top: solid 0.2rem var(--green);
     padding: 0;

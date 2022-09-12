@@ -10,9 +10,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     if ($user != null) {
     
         $_SESSION['user'] = $user->FirstName;
-        $_SESSION['ID']=$user->ID;
-        $_POST[]=array();
-      
+        $_SESSION['user-id']=$user->ID;
+        unset($_POST);
         if ($user->FirstName != "Admin") {
        
             header('Location: index.php');

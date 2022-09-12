@@ -19,8 +19,7 @@ class Vacation
 
     public static function searchByCondtition($condition, mysqli $conn)
     {
-        $query = "SELECT * FROM vacation WHERE id = $condition or
-         name = '$condition' or description='$condition' or price = $condition or place = '$condition";
+        $query = "SELECT * FROM vacation WHERE name like '%$condition%' or description like '%$condition%' or place like '%$condition%'";
 
         $result = array();
         if ($msqlObj = $conn->query($query)) {
@@ -30,6 +29,8 @@ class Vacation
             return $result;
         }
     }
+
+
 
     public static function getTopSix(mysqli $conn)
     {
